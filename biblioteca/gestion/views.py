@@ -39,6 +39,12 @@ def buscar_libros(request):
     serializer = LibroSerializer(libros, many=True)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def listar_libros_disponibles(request):
+    libros_disponibles = Libro.objects.filter(disponible=True)
+    serializer = LibroSerializer(libros_disponibles, many=True)
+    return Response(serializer.data)
+
 # Endpoint para registrar préstamos y devoluciones
 @api_view(['POST'])
 def registrar_prestamo(request):
